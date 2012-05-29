@@ -14,6 +14,7 @@
 @synthesize shortDescription = _shortDescription;
 @synthesize description = _description;
 @synthesize imageURLString = _imageURLString;
+@synthesize imageData = _imageData;
 @synthesize itemURLString = _itemURLString;
 
 - (id)initWithTitle:(NSString *)title {
@@ -30,6 +31,7 @@
     [self setShortDescription:nil];
     [self setDescription:nil];
     [self setImageURLString:nil];
+    [self setImageData:nil];
     [self setItemURLString:nil];
     
     [super dealloc];

@@ -29,7 +29,7 @@ typedef enum {
  as a mail compose view) and a Facebook App ID.
  */
 @interface BCDShareSheet : NSObject <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, 
-                                   FBSessionDelegate, FBDialogDelegate>
+                                   FBSessionDelegate, FBDialogDelegate, FBRequestDelegate>
 
 /**
  Obtain a reference to the shared instance of the BCDShareSheet. Don't try to use the sharer until 

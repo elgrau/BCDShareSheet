@@ -84,7 +84,7 @@ typedef void (^CompletionBlock)(BCDResult);
     [self setItem:item];
     
     [self setCompletionBlock:completionBlock];
-        
+    
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Share via"
                                                        delegate:self
                                               cancelButtonTitle:nil
@@ -149,16 +149,16 @@ typedef void (^CompletionBlock)(BCDResult);
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error {
     [self.rootViewController dismissModalViewControllerAnimated:YES];
-                            
-                            if (error!=nil) {
-                                if (self.completionBlock!=nil) {
-                                    self.completionBlock(BCDResultFailure);
-                                }
-                            } else {
-                                if (self.completionBlock!=nil) {
-                                    self.completionBlock(BCDResultSuccess);
-                                }
-                            }
+    
+    if (error!=nil) {
+        if (self.completionBlock!=nil) {
+            self.completionBlock(BCDResultFailure);
+        }
+    } else {
+        if (self.completionBlock!=nil) {
+            self.completionBlock(BCDResultSuccess);
+        }
+    }
 }
 
 
@@ -176,7 +176,7 @@ typedef void (^CompletionBlock)(BCDResult);
         [self showFacebookShareDialog];
     }
 }
-     
+
 #pragma mark -
 #pragma mark Private Methods
 
@@ -195,11 +195,11 @@ typedef void (^CompletionBlock)(BCDResult);
         }
         
         NSDictionary *facebookService = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     [NSNumber numberWithInt:BCDFacebookService], kServiceKey, 
-                                     kFacebookServiceTitle, kTitleKey,
-                                     nil];
+                                         [NSNumber numberWithInt:BCDFacebookService], kServiceKey, 
+                                         kFacebookServiceTitle, kTitleKey,
+                                         nil];
         [services addObject:facebookService];
-
+        
         // Twitter is only available on iOS5 or later
         if([TWTweetComposeViewController class]) {
             NSDictionary *twitterService = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -221,7 +221,7 @@ typedef void (^CompletionBlock)(BCDResult);
     
     NSMutableString *body = [NSMutableString string];
     
-    [body appendFormat:@"%@\n", self.item.title];
+//    [body appendFormat:@"%@\n", self.item.title];
     if (self.item.itemURLString!=nil) {
         [body appendFormat:@"%@\n", self.item.itemURLString];
     }
@@ -229,11 +229,14 @@ typedef void (^CompletionBlock)(BCDResult);
         [body appendFormat:@"%@", self.item.description];
     }
     
-    if (self.appName!=nil) {        
-        [body appendFormat:@"\n\nSent from %@", self.appName];
+    if (self.appName!=nil) {
+//        [body appendFormat:@"\n\nSent from %@", self.appName];
     }
     
     [mailComposeViewController setMessageBody:body isHTML:NO];
+    [mailComposeViewController addAttachmentData: self.item.imageData 
+                                        mimeType: @"image/jpeg" 
+                                        fileName: [NSString stringWithFormat: @"%@.jpg", self.item.title]];
     [self.rootViewController presentModalViewController:mailComposeViewController animated:YES];
     [mailComposeViewController release];
 }
@@ -276,24 +279,36 @@ typedef void (^CompletionBlock)(BCDResult);
     return [self.facebook isSessionValid];
 }
 
-- (void)showFacebookShareDialog {    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    if (self.item.title!=nil) {
-        [params setValue:self.item.title forKey:@"name"];
-        [params setValue:self.item.title forKey:@"caption"];
+- (void)showFacebookShareDialog {
+    if (self.item.imageData) {
+        UIImage *img  = [UIImage imageWithData: self.item.imageData];
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       img, @"picture",
+                                       nil];
+        [self.facebook requestWithMethodName:@"photos.upload"
+                                   andParams:params
+                               andHttpMethod:@"POST"
+                                 andDelegate:self];
+    } else {
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        if (self.item.title!=nil) {
+            [params setValue:self.item.title forKey:@"name"];
+            [params setValue:self.item.title forKey:@"caption"];
+        }
+        if (self.item.imageURLString!=nil) {
+            [params setValue:self.item.imageURLString forKey:@"picture"];
+        }
+        if (self.item.description!=nil) {
+            [params setValue:self.item.description forKey:@"description"];
+        }
+        if (self.item.itemURLString!=nil) {
+            [params setValue:self.item.itemURLString forKey:@"link"];
+        }
+        [self.facebook dialog:@"feed" andParams:params andDelegate:self];
     }
-    if (self.item.imageURLString!=nil) {
-        [params setValue:self.item.imageURLString forKey:@"picture"];
-    }
-    if (self.item.description!=nil) {
-        [params setValue:self.item.description forKey:@"description"];
-    }
-    if (self.item.itemURLString!=nil) {
-        [params setValue:self.item.itemURLString forKey:@"link"];
-    }
-    [self.facebook dialog:@"feed" andParams:params andDelegate:self];
 }
-    
+
 
 #pragma mark - FaceBook Dialog Delegate
 
@@ -315,7 +330,6 @@ typedef void (^CompletionBlock)(BCDResult);
     }
 }
 
-
 #pragma mark - Twitter
 
 - (void)shareViaTwitter {
@@ -325,16 +339,16 @@ typedef void (^CompletionBlock)(BCDResult);
     [tweetText appendString:self.item.title];
     
     if (self.item.shortDescription!=nil) {
-        [tweetText appendFormat:@" - %@", self.item.shortDescription];
+//        [tweetText appendFormat:@" - %@", self.item.shortDescription];
     }
     
     if (self.hashTag!=nil) {
-        [tweetText appendFormat:@" #%@", self.hashTag];
+//        [tweetText appendFormat:@" #%@", self.hashTag];
     }
-        
+    
     TWTweetComposeViewController *tweetComposeViewController = [[TWTweetComposeViewController alloc] init];
     [tweetComposeViewController setInitialText:tweetText];
-    [tweetComposeViewController addURL:[NSURL URLWithString:self.item.itemURLString]];
+    [tweetComposeViewController addImage: [UIImage imageWithData: self.item.imageData]];
     [self.rootViewController presentModalViewController:tweetComposeViewController animated:YES];
     
     [tweetComposeViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {

@@ -58,10 +58,8 @@
 
 - (IBAction)shareIt:(id)sender
 {
-    BCDShareableItem *item = [[BCDShareableItem alloc] initWithTitle:@"A cat in a cutlery rack"];
-    [item setDescription:@"A cat in a cutlery rack, what more can I say?"];
-    [item setItemURLString:@"http://icanhascheezburger.com/2011/11/21/funny-pictures-drainin-dah-catlery/"];
-    [item setImageURLString:@"http://icanhascheezburger.files.wordpress.com/2011/11/funny-pictures-drainin-dah-catlery.jpg"];
+    BCDShareableItem *item = [[BCDShareableItem alloc] initWithTitle:@"iVilla"];
+    [item setImageData: [NSData dataWithContentsOfFile: @"Villa1.jpg"]];
     
     UIActionSheet *sheet = [[BCDShareSheet sharedSharer] sheetForSharing:item completion:^(BCDResult result) {
         if (result==BCDResultSuccess) {

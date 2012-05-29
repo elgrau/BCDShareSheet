@@ -32,7 +32,7 @@
     BCDShareSheet *sharedSharer = [BCDShareSheet sharedSharer];
     [sharedSharer setAppName:@"Sample App"];
     [sharedSharer setRootViewController:self.viewController];
-    [sharedSharer setFacebookAppID:@"123456789"]; // Replace with the ID of your Facebook app
+    [sharedSharer setFacebookAppID:@"169912689761182"]; // Replace with the ID of your Facebook app
                                                   // and ensure it matches the ID in the URL
                                                   // scheme in the Info.plist
     

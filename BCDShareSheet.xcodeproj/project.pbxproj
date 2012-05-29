@@ -65,6 +65,7 @@
 		23C8B1CF14C791C4006FDC53 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C8B1CE14C791C4006FDC53 /* UIKit.framework */; };
 		23C8B1D114C791C4006FDC53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C8B1D014C791C4006FDC53 /* Foundation.framework */; };
 		23C8B1D314C791C4006FDC53 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C8B1D214C791C4006FDC53 /* CoreGraphics.framework */; };
+		24B446D31574F7B4006DBC63 /* Villa1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24B446D21574F7B4006DBC63 /* Villa1.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +116,7 @@
 		23C8B1D014C791C4006FDC53 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		23C8B1D214C791C4006FDC53 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		23C8B1F014C79416006FDC53 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		24B446D21574F7B4006DBC63 /* Villa1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Villa1.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				234EABF714C799AB005178A4 /* BCDViewController.xib */,
 				234EABF914C799AB005178A4 /* InfoPlist.strings */,
 				234EABFB14C799AB005178A4 /* main.m */,
+				24B446D21574F7B4006DBC63 /* Villa1.jpg */,
 			);
 			name = "Sample App";
 			path = "BCDShareSheet/Sample App";
@@ -361,6 +364,7 @@
 				234EABFF14C799AB005178A4 /* BCDViewController.xib in Resources */,
 				234EAC0014C799AB005178A4 /* InfoPlist.strings in Resources */,
 				234EAC1F14C799C3005178A4 /* FBDialog.bundle in Resources */,
+				24B446D31574F7B4006DBC63 /* Villa1.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +471,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BCDShareSheet/Framework/Supporting Files/BCDShareSheet-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "BCDShareSheet/Framework/Supporting Files/BCDShareSheet-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -495,6 +500,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BCDShareSheet/Framework/Supporting Files/BCDShareSheet-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "BCDShareSheet/Framework/Supporting Files/BCDShareSheet-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";

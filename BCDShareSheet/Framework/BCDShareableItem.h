@@ -36,6 +36,11 @@
 @property (nonatomic, retain) NSString *imageURLString;
 
 /**
+ A String containing an absolute URL to an image relevent to the thing you're sharing.
+ */
+@property (nonatomic, retain) NSData *imageData;
+
+/**
  A String containing an absolute URL to the thing you're sharing.
  */
 @property (nonatomic, retain) NSString *itemURLString;
