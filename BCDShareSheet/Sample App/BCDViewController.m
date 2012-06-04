@@ -59,13 +59,17 @@
 - (IBAction)shareIt:(id)sender
 {
     BCDShareableItem *item = [[BCDShareableItem alloc] initWithTitle:@"iVilla"];
-    [item setImageData: [NSData dataWithContentsOfFile: @"Villa1.jpg"]];
     
+    UIImage *img = [UIImage imageNamed: @"Villa1.jpg"];
+    NSData *imgData = UIImageJPEGRepresentation(img, 1.0);    
+    [item setImageData: imgData];
+
     UIActionSheet *sheet = [[BCDShareSheet sharedSharer] sheetForSharing:item completion:^(BCDResult result) {
         if (result==BCDResultSuccess) {
             NSLog(@"Yay!");
         }
     }];
+    
     [sheet showInView:self.view];
     [item release];
 }

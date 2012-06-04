@@ -186,13 +186,13 @@ typedef void (^CompletionBlock)(BCDResult);
         NSMutableArray *services = [NSMutableArray array];
         
         // Check to see if email if available
-        if ([MFMailComposeViewController canSendMail]) {
-            NSDictionary *mailService = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSNumber numberWithInt:BCDEmailService], kServiceKey, 
-                                         kEmailServiceTitle, kTitleKey,
-                                         nil];
-            [services addObject:mailService];
-        }
+//        if ([MFMailComposeViewController canSendMail]) {
+//            NSDictionary *mailService = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                         [NSNumber numberWithInt:BCDEmailService], kServiceKey, 
+//                                         kEmailServiceTitle, kTitleKey,
+//                                         nil];
+//            [services addObject:mailService];
+//        }
         
         NSDictionary *facebookService = [NSDictionary dictionaryWithObjectsAndKeys:
                                          [NSNumber numberWithInt:BCDFacebookService], kServiceKey, 
@@ -253,7 +253,7 @@ typedef void (^CompletionBlock)(BCDResult);
         // request authorisation
         // ask for 'offline access' so that the credentials don't
         // expire.
-        NSArray *permissions = [NSArray arrayWithObjects:@"offline_access", nil];
+        NSArray *permissions = [NSArray arrayWithObjects:@"publish_stream", nil];
         [self.facebook authorize:permissions];
         [self setWaitingForFacebookAuthorisation:YES];
     }
@@ -280,24 +280,15 @@ typedef void (^CompletionBlock)(BCDResult);
 }
 
 - (void)showFacebookShareDialog {
-    if (self.item.imageData) {
-        UIImage *img  = [UIImage imageWithData: self.item.imageData];
-        
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       img, @"picture",
-                                       nil];
-        [self.facebook requestWithMethodName:@"photos.upload"
-                                   andParams:params
-                               andHttpMethod:@"POST"
-                                 andDelegate:self];
-    } else {
+    /*
+    
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
         if (self.item.title!=nil) {
             [params setValue:self.item.title forKey:@"name"];
             [params setValue:self.item.title forKey:@"caption"];
         }
-        if (self.item.imageURLString!=nil) {
-            [params setValue:self.item.imageURLString forKey:@"picture"];
+        if (self.item.imageData!=nil) {
+            [params setValue:self.item.imageData forKey:@"picture"];
         }
         if (self.item.description!=nil) {
             [params setValue:self.item.description forKey:@"description"];
@@ -306,7 +297,14 @@ typedef void (^CompletionBlock)(BCDResult);
             [params setValue:self.item.itemURLString forKey:@"link"];
         }
         [self.facebook dialog:@"feed" andParams:params andDelegate:self];
-    }
+    */
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue: [UIImage imageWithData: self.item.imageData] forKey: @"source"];
+    [params setValue: self.item.title forKey: @"message"];
+    
+    [self.facebook requestWithGraphPath: @"me/photos" andParams: params 
+                          andHttpMethod: @"POST" andDelegate: self];
 }
 
 
