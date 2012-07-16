@@ -13,6 +13,7 @@
 @synthesize title = _title;
 @synthesize shortDescription = _shortDescription;
 @synthesize description = _description;
+@synthesize imageURLString = _imageURLString;
 @synthesize imageData = _imageData;
 @synthesize itemURLString = _itemURLString;
 
@@ -29,6 +30,7 @@
     [self setTitle:nil];
     [self setShortDescription:nil];
     [self setDescription:nil];
+    [self setImageURLString:nil];
     [self setImageData:nil];
     [self setItemURLString:nil];
     

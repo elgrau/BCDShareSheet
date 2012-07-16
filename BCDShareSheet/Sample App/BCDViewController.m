@@ -58,12 +58,15 @@
 
 - (IBAction)shareIt:(id)sender
 {
-    BCDShareableItem *item = [[BCDShareableItem alloc] initWithTitle:@"iVilla"];
-    
+    BCDShareableItem *item = [[BCDShareableItem alloc] initWithTitle:@"Title"];
+    item.shortDescription = @"shortDescription";
+    item.description = @"description";
+    [item setImageURLString:@"http://farm2.staticflickr.com/1390/4611054437_efb54d73af_t.jpg"];
+    /*
     UIImage *img = [UIImage imageNamed: @"Villa1.jpg"];
     NSData *imgData = UIImageJPEGRepresentation(img, 1.0);    
     [item setImageData: imgData];
-
+    */ 
     UIActionSheet *sheet = [[BCDShareSheet sharedSharer] sheetForSharing:item completion:^(BCDResult result) {
         if (result==BCDResultSuccess) {
             NSLog(@"Yay!");

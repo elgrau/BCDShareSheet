@@ -221,7 +221,7 @@ typedef void (^CompletionBlock)(BCDResult);
     
     NSMutableString *body = [NSMutableString string];
     
-//    [body appendFormat:@"%@\n", self.item.title];
+    [body appendFormat:@"%@\n", self.item.title];
     if (self.item.itemURLString!=nil) {
         [body appendFormat:@"%@\n", self.item.itemURLString];
     }
@@ -230,7 +230,7 @@ typedef void (^CompletionBlock)(BCDResult);
     }
     
     if (self.appName!=nil) {
-//        [body appendFormat:@"\n\nSent from %@", self.appName];
+        [body appendFormat:@"\n\nSent from %@", self.appName];
     }
     
     [mailComposeViewController setMessageBody:body isHTML:NO];
@@ -280,31 +280,38 @@ typedef void (^CompletionBlock)(BCDResult);
 }
 
 - (void)showFacebookShareDialog {
-    /*
-    
-        NSMutableDictionary *params = [NSMutableDictionary dictionary];
-        if (self.item.title!=nil) {
-            [params setValue:self.item.title forKey:@"name"];
-            [params setValue:self.item.title forKey:@"caption"];
-        }
-        if (self.item.imageData!=nil) {
-            [params setValue:self.item.imageData forKey:@"picture"];
-        }
-        if (self.item.description!=nil) {
-            [params setValue:self.item.description forKey:@"description"];
-        }
-        if (self.item.itemURLString!=nil) {
-            [params setValue:self.item.itemURLString forKey:@"link"];
-        }
-        [self.facebook dialog:@"feed" andParams:params andDelegate:self];
-    */
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue: [UIImage imageWithData: self.item.imageData] forKey: @"source"];
-    [params setValue: self.item.title forKey: @"message"];
+    NSString *graphPath = @"me/feed";
+
+    if (self.item.title!=nil) {
+        [params setValue: self.item.title forKey: @"name"];
+    }
     
-    [self.facebook requestWithGraphPath: @"me/photos" andParams: params 
-                          andHttpMethod: @"POST" andDelegate: self];
+    if (self.item.shortDescription!=nil) {
+        [params setValue: self.item.shortDescription forKey: @"caption"];
+    }
+    
+    if (self.item.description!=nil) {
+        [params setValue: self.item.description forKey: @"message"];
+    }
+    
+    if (self.item.imageURLString!=nil) {
+        [params setValue: self.item.imageURLString forKey:@"picture"];
+    }
+    
+    if (self.item.itemURLString!=nil) {
+        [params setValue:self.item.itemURLString forKey:@"link"];
+    }
+        
+    if (self.item.imageData != nil) {
+        [params setValue: [UIImage imageWithData: self.item.imageData] forKey: @"source"];
+        
+        graphPath = @"me/photos";
+    }
+    
+    [self.facebook requestWithGraphPath: graphPath andParams: params 
+                          andHttpMethod: @"POST" andDelegate: self];        
 }
 
 
@@ -337,11 +344,11 @@ typedef void (^CompletionBlock)(BCDResult);
     [tweetText appendString:self.item.title];
     
     if (self.item.shortDescription!=nil) {
-//        [tweetText appendFormat:@" - %@", self.item.shortDescription];
+        [tweetText appendFormat:@" - %@", self.item.shortDescription];
     }
     
     if (self.hashTag!=nil) {
-//        [tweetText appendFormat:@" #%@", self.hashTag];
+        [tweetText appendFormat:@" #%@", self.hashTag];
     }
     
     TWTweetComposeViewController *tweetComposeViewController = [[TWTweetComposeViewController alloc] init];
