@@ -40,6 +40,8 @@
  */
 @property (nonatomic, retain) NSData *imageData;
 
+@property (nonatomic) CGSize imageSize;
+
 /**
  A String containing an absolute URL to the thing you're sharing.
  */

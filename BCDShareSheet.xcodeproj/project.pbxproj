@@ -66,6 +66,8 @@
 		23C8B1D114C791C4006FDC53 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C8B1D014C791C4006FDC53 /* Foundation.framework */; };
 		23C8B1D314C791C4006FDC53 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C8B1D214C791C4006FDC53 /* CoreGraphics.framework */; };
 		24B446D31574F7B4006DBC63 /* Villa1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24B446D21574F7B4006DBC63 /* Villa1.jpg */; };
+		DD14FDD815B97A7800792B0D /* UIImage+Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = DD14FDD615B97A7800792B0D /* UIImage+Helper.h */; };
+		DD14FDD915B97A7800792B0D /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = DD14FDD715B97A7800792B0D /* UIImage+Helper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +119,8 @@
 		23C8B1D214C791C4006FDC53 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		23C8B1F014C79416006FDC53 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		24B446D21574F7B4006DBC63 /* Villa1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Villa1.jpg; sourceTree = "<group>"; };
+		DD14FDD615B97A7800792B0D /* UIImage+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Helper.h"; sourceTree = "<group>"; };
+		DD14FDD715B97A7800792B0D /* UIImage+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Helper.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,8 @@
 				234EABE014C7999C005178A4 /* BCDShareableItem.m */,
 				234EABE114C7999C005178A4 /* BCDShareSheet.h */,
 				234EABE214C7999C005178A4 /* BCDShareSheet.m */,
+				DD14FDD615B97A7800792B0D /* UIImage+Helper.h */,
+				DD14FDD715B97A7800792B0D /* UIImage+Helper.m */,
 				234EABE314C7999C005178A4 /* Supporting Files */,
 			);
 			name = Framework;
@@ -277,6 +283,7 @@
 				234EAC4E14C7A77B005178A4 /* JSON.h in Headers */,
 				234EAC4B14C7A75C005178A4 /* FBDialog.h in Headers */,
 				234EAC4A14C7A74F005178A4 /* Facebook.h in Headers */,
+				DD14FDD815B97A7800792B0D /* UIImage+Helper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +410,7 @@
 				234EAC3014C799C3005178A4 /* SBJsonBase.m in Sources */,
 				234EAC3214C799C3005178A4 /* SBJsonParser.m in Sources */,
 				234EAC3414C799C3005178A4 /* SBJsonWriter.m in Sources */,
+				DD14FDD915B97A7800792B0D /* UIImage+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

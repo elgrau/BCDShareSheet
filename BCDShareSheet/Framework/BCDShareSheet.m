@@ -24,6 +24,7 @@ NSString * const kFBExpiryDateKey = @"FBExpirationDateKey";
 
 #import <Twitter/Twitter.h>
 #import "BCDShareSheet.h"
+#import "UIImage+Helper.h"
 
 typedef void (^CompletionBlock)(BCDResult);
 
@@ -305,8 +306,15 @@ typedef void (^CompletionBlock)(BCDResult);
     }
         
     if (self.item.imageData != nil) {
-        [params setValue: [UIImage imageWithData: self.item.imageData] forKey: @"source"];
+
         
+        UIImage *image = [UIImage imageWithData: self.item.imageData];
+        
+        if (!CGSizeEqualToSize(self.item.imageSize, CGSizeZero)) {
+            image = [image scaleProportionalToSize:self.item.imageSize];
+        }
+
+        [params setValue: image forKey: @"source"];
         graphPath = @"me/photos";
     }
     

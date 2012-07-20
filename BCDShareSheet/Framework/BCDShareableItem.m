@@ -16,11 +16,13 @@
 @synthesize imageURLString = _imageURLString;
 @synthesize imageData = _imageData;
 @synthesize itemURLString = _itemURLString;
+@synthesize imageSize = _imageSize;
 
 - (id)initWithTitle:(NSString *)title {
     self = [super init];
     if (self!=nil) {
         [self setTitle:title];
+        self.imageSize = CGSizeZero;
     }
     return self;
 }
