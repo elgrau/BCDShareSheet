@@ -352,7 +352,12 @@ typedef void (^CompletionBlock)(BCDResult);
     [tweetText appendString:self.item.title];
     
     if (self.item.shortDescription!=nil) {
-        [tweetText appendFormat:@" - %@", self.item.shortDescription];
+        
+        if ([self.item.title length]>0) {
+            [tweetText appendFormat:@" - %@", self.item.shortDescription];
+        } else {
+            [tweetText appendFormat:@"%@", self.item.shortDescription];
+        }
     }
     
     if (self.hashTag!=nil) {
